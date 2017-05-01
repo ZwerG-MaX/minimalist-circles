@@ -33,6 +33,7 @@ function conky_main()
     draw_date_and_time()
     draw_disk_usage()
     draw_cpu_usage()
+    draw_memory_usage()
 end
 
 function draw_date_and_time()
@@ -85,4 +86,21 @@ function draw_cpu_usage()
         cairo_arc(cr, center_x, center_y, radius, (start_angle - 180) * (math.pi / 180), (angle2 - 180) * (math.pi / 180))
         cairo_stroke(cr)
     end
+end
+
+function draw_memory_usage()
+    cairo_move_to(cr, 1785, 510)
+    cairo_set_font_size(cr, 30)
+    cairo_show_text(cr, conky_parse("${memperc}%"))
+    cairo_stroke(cr)
+
+    local memusage = tonumber(conky_parse("${memperc}")) / 100 * 360
+    local start_angle = 0 * (math.pi/180)
+    local end_angle = (memusage) * (math.pi/180)
+    local radius = 85
+    local center_y = 500
+    local center_x = 1810
+    cairo_set_line_width(cr, 5.0)
+    cairo_arc(cr, center_x, center_y, radius, end_angle, start_angle)
+    cairo_stroke(cr)
 end
