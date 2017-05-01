@@ -51,6 +51,13 @@ function draw_date_and_time()
 end
 
 function draw_disk_usage()
+    cairo_set_font_size(cr, 18)
+    cairo_move_to(cr, 25, 380)
+    cairo_show_text(cr, "DISK USAGE")
+    cairo_move_to(cr, 25, 385)
+    cairo_line_to(cr, 170, 385)
+    cairo_stroke(cr)
+
     cairo_move_to(cr, 40, 510)
     cairo_set_font_size(cr, 30)
     cairo_show_text(cr, conky_parse("/ at ${fs_used_perc /}%"))
@@ -80,7 +87,7 @@ function draw_disk_usage()
 end
 
 function draw_cpu_usage()
-    local base_x = 460
+    local base_x = 470
     local base_y = 905
     for i = 0, 4, 1
     do
@@ -88,18 +95,34 @@ function draw_cpu_usage()
         local cpu = tonumber(conky_parse("${cpu cpu" .. i .. "}"))
         cairo_show_text(cr, "Cpu" .. i)
         cairo_stroke(cr)
+
+        cairo_set_source_rgba(cr, 1, 1, 0.2, 0.6)
         local angle2 = (cpu / 100) * 360
         local center_x = (base_x + 37) + (i * 200)
         local center_y = 900
         local radius = 85
         local start_angle = 0
-        cairo_set_line_width(cr, 5.0)
+        cairo_set_line_width(cr, 6.0)
         cairo_arc(cr, center_x, center_y, radius, (start_angle - 180) * (math.pi / 180), (angle2 - 180) * (math.pi / 180))
         cairo_stroke(cr)
+        cairo_set_source_rgba(cr, 0.933, 0.905, 0.894, 1)
+        cairo_set_line_width(cr, 5.0)
+        cairo_arc(cr, center_x, center_y, radius + 5, (start_angle - 180) * (math.pi/180), 180 * (math.pi/180))
+        cairo_stroke(cr)
+
+
     end
 end
 
 function draw_memory_usage()
+    cairo_set_font_size(cr, 18)
+    cairo_move_to(cr, 1735, 380)
+    cairo_show_text(cr, "MEMORY USAGE")
+    cairo_set_line_width(cr, 2.0)
+    cairo_move_to(cr, 1735, 385)
+    cairo_line_to(cr, 1900, 385)
+    cairo_stroke(cr)
+
     cairo_move_to(cr, 1785, 510)
     cairo_set_font_size(cr, 30)
     cairo_show_text(cr, conky_parse("${memperc}%"))
