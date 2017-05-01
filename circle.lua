@@ -68,19 +68,21 @@ function draw_disk_usage()
 end
 
 function draw_cpu_usage()
-    cairo_move_to(cr, 413, 905)
-    local cpu0 = tonumber(conky_parse("${cpu cpu0}"))
-    cairo_show_text(cr, "Cpu0")
-    cairo_stroke(cr)
-    print(cpu0)
-
-    --    local angle2 = (cpu0 - 180 ) * (math.pi / 180)
-    local angle2 = (cpu0/100) * 360
-    local center_x = 450
-    local center_y = 900
-    local radius = 85
-    local start_angle = 0
-    cairo_set_line_width(cr, 5.0)
-    cairo_arc(cr, center_x, center_y, radius, (start_angle - 180) * (math.pi/180), (angle2 - 180) * (math.pi/180))
-    cairo_stroke(cr)
+    local base_x = 460
+    local base_y = 905
+    for i = 0, 4, 1
+    do
+        cairo_move_to(cr, base_x + (i * 200), base_y)
+        local cpu = tonumber(conky_parse("${cpu cpu" .. i .. "}"))
+        cairo_show_text(cr, "Cpu" .. i)
+        cairo_stroke(cr)
+        local angle2 = (cpu / 100) * 360
+        local center_x = (base_x + 37) + (i * 200)
+        local center_y = 900
+        local radius = 85
+        local start_angle = 0
+        cairo_set_line_width(cr, 5.0)
+        cairo_arc(cr, center_x, center_y, radius, (start_angle - 180) * (math.pi / 180), (angle2 - 180) * (math.pi / 180))
+        cairo_stroke(cr)
+    end
 end
