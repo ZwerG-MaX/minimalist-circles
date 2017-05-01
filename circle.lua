@@ -113,6 +113,8 @@ function draw_cpu_usage()
         cairo_arc(cr, center_x, center_y, radius + 5, (start_angle - 180) * (math.pi/180), 180 * (math.pi/180))
         cairo_stroke(cr)
 
+        cairo_move_to(cr, base_x + 20 + (i * 200), base_y)
+        cairo_show_text(cr, cpu .. "%")
 
     end
 end
