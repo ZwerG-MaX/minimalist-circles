@@ -1,2 +1,2 @@
 #!/bin/bash
-nohup conky -c ~/.clonky-lua &
+nohup conky -c ~/.conky-lua/simple.conky &
