@@ -88,7 +88,7 @@ function draw_disk_usage()
 end
 
 function draw_cpu_usage()
-    local base_x = 470
+    local base_x = 490
     local base_y = 905
     for i = 0, 4, 1
     do
