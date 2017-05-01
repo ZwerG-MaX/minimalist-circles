@@ -58,13 +58,13 @@ function draw_disk_usage()
     cairo_stroke(cr)
 
     -- cairo_arc requires radions
-    local angle2 = diskRoot * (math.pi / 180)
+    local angle2 = diskRoot
     local center_x = 110
     local center_y = 500
     local radius = 85
     local start_angle = 0
     cairo_set_line_width(cr, 5.0)
-    cairo_arc(cr, center_x, center_y, radius, start_angle, angle2)
+    cairo_arc(cr, center_x, center_y, radius, (start_angle - 180) * (math.pi/180), (angle2 - 180) * (math.pi/180))
     cairo_stroke(cr)
 end
 
