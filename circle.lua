@@ -120,10 +120,12 @@ function draw_cpu_usage()
         do
             for dy = 1, 2, 1
             do
+		local cpu_num = dx + ((dy - 1) * 4)
+		print(cpu_num)
                 cairo_set_font_size(cr, 16)
                 cairo_move_to(cr, base_x + 42 + (120 * dx), (base_y - 308) + (205 * dy))
-                local cpu = tonumber(conky_parse("${cpu cpu" .. dy .. "}"))
-                cairo_show_text(cr, "Cpu" .. (dy * dx))
+                local cpu = tonumber(conky_parse("${cpu cpu" .. cpu_num .. "}"))
+                cairo_show_text(cr, "Cpu" .. cpu_num)
                 cairo_stroke(cr)
 
                 cairo_set_source_rgba(cr, 1, 1, 0.2, 0.6)
