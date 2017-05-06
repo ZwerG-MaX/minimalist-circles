@@ -87,7 +87,7 @@ function draw_disk_usage()
 end
 
 function draw_cpu_usage()
-    local base_x = 610
+    local base_x = 645
     local base_y = 905
     local cpu_count = tonumber(conky_parse("${exec grep -c ^processor /proc/cpuinfo}"))
     print("cpu count " .. cpu_count)
